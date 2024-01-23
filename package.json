@@ -39,7 +39,7 @@
         "!dist/**/*.spec.*"
     ],
     "peerDependencies": {
-        "svelte": ">=5.0.0 | <6.0.0"
+        "svelte": ">=5.0.0 || <6.0.0"
     },
     "devDependencies": {
         "@iconify-json/mdi": "^1.1.64",
