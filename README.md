@@ -3,6 +3,10 @@
 
 Provides components for interacting with Sui wallets.
 
+# Showcase
+
+[SuiForge](https://suiforge.com/) uses sui-svelte to interact with SUI wallets.
+
 # Setup
 
 Barebones example:
