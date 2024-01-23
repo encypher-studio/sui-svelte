@@ -7,7 +7,7 @@ Provides components for interacting with Sui wallets.
 
 Barebones example:
 
-routes/*page.svelte
+routes/+page.svelte
 ```ts
 <script lang="ts">
     import {SuiModule, ConnectButton} from "@encypher/sui-svelte"
