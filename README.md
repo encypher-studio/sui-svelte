@@ -1,4 +1,5 @@
 # Sui Svelte
+[![npm version](https://badge.fury.io/js/sui-svelte.svg)](https://badge.fury.io/js/sui-svelte)
 
 Provides components for interacting with Sui wallets.
 
