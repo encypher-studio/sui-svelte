@@ -14,22 +14,27 @@ Barebones example:
 routes/+page.svelte
 ```ts
 <script lang="ts">
-    import {SuiModule, ConnectButton} from "@encypher/sui-svelte"
+    import {SuiModule, ConnectButton} from "sui-svelte"
 </script>
 
 <SuiModule />
 <ConnectButton />
  ```
 
- # Getting connected account
+# Getting connected account
+
+The account object exposes the connected account.
+
 
  ```ts
  <script lang="ts">
-	import { account } from "@encypher/sui-svelte/SuiModule"
+	import { account } from "sui-svelte/SuiModule"
 
-	console.log("Connected account object:", account)
-
-    constole.log("Connected address:", account.address)
+    console.log("Is account connected?", account.val !== undefined)
+    if (account.val) {
+        console.log("Connected account object:", account.val)
+        console.log("Connected address:", account.val.address)
+    }
 </script>
   ```
 
@@ -39,7 +44,7 @@ routes/+page.svelte
 
  ```ts
  <script lang="ts">
-	import { signAndExecuteTransactionBlock } from "@encypher/sui-svelte/SuiModule"
+	import { signAndExecuteTransactionBlock } from "sui-svelte/SuiModule"
 	import { TransactionBlock } from "@mysten/sui.js/transactions"
 
 	const sendTx = () => {
@@ -54,6 +59,15 @@ routes/+page.svelte
     }
 </script>
   ```
+
+# Manually trigger connect modal
+ ```ts
+ <script lang="ts">
+	import { connectWithModal } from "sui-svelte/SuiModule"
+
+    connectWithModal()
+</script>
+```
 
 # Customization
 
@@ -73,8 +87,8 @@ You should always open the modal using the ConnectButton or the connect exported
 
 ```html
 <script lang="ts">
-    import {SuiModule} from "@encypher/sui-svelte/SuiModule"
-    import {connectModal, resolve} from "@encypher/sui-svelte/ConnectModal"
+    import {SuiModule} from "sui-svelte/SuiModule"
+    import {connectModal, resolve} from "sui-svelte/ConnectModal"
     import type { IWallet } from "@suiet/wallet-sdk"
 
     // Get the wallet from the browser
@@ -106,3 +120,7 @@ You should always open the modal using the ConnectButton or the connect exported
 # Issues and contributions
 
 Feel free to submit PRs, or issues for any doubts or feature requests.
+
+# Contact
+
+contact@encypherstudio.com
