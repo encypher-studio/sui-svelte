@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { SuiModule } from "$lib"
-  import ConnectButton from "$lib/ConnectButton/ConnectButton.svelte"
+  import { SuiModule } from "$lib/SuiModule"
+  import { ConnectButton } from "$lib/ConnectButton"
 </script>
 
 <SuiModule />

@@ -1,1 +1,0 @@
-export const LocalStorageAdapter = "SUI_MODULE_ADAPTER"

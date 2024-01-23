@@ -31,6 +31,18 @@
         ".": {
             "types": "./dist/index.d.ts",
             "svelte": "./dist/index.js"
+        },
+        "./ConnectButton": {
+            "types": "./dist/ConnectButton/index.d.ts",
+            "svelte": "./dist/ConnectButton/index.js"
+        },
+        "./ConnectModal": {
+            "types": "./dist/ConnectModal/index.d.ts",
+            "svelte": "./dist/ConnectModal/index.js"
+        },
+        "./SuiModule": {
+            "types": "./dist/SuiModule/index.d.ts",
+            "svelte": "./dist/SuiModule/index.js"
         }
     },
     "files": [
