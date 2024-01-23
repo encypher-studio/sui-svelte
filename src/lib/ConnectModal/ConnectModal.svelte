@@ -17,7 +17,6 @@
 
 <script lang="ts">
   import type { IWallet } from "@suiet/wallet-sdk"
-  import Close from "~icons/mdi/Close"
 
   interface IProps {
     availableWallets: IWallet[]
@@ -71,7 +70,13 @@
             <div class="flex items-center text-xl font-bold">Available wallets</div>
             <div class="flex justify-end">
               <button class="btn-icon variant-filled-error btn-sm" on:click={onClose}>
-                <Close />
+                <svg viewBox="0 0 24 24" width="1.2em" height="1.2em">
+                  <path
+                    fill="currentColor"
+                    d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z"
+                  >
+                  </path>
+                </svg>
               </button>
             </div>
           </div>
