@@ -5,7 +5,7 @@
 
   let _resolve = $state<(value: IWallet | PromiseLike<IWallet | undefined> | undefined) => void>()
   let resolve = {
-    get val() {
+    get value() {
       return _resolve
     },
     set(resolve: typeof _resolve) {
@@ -43,15 +43,15 @@
   }
 
   const onClose = () => {
-    if (resolve.val) {
-      resolve.val(undefined)
+    if (resolve.value) {
+      resolve.value(undefined)
     }
     connectModal?.close()
   }
 
   const onSelected = (wallet: IWallet) => {
-    if (resolve.val) {
-      resolve.val(wallet)
+    if (resolve.value) {
+      resolve.value(wallet)
     }
     connectModal?.close()
   }

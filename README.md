@@ -14,11 +14,22 @@ Barebones example:
 routes/+page.svelte
 ```ts
 <script lang="ts">
-    import {SuiModule, ConnectButton} from "sui-svelte"
+    import {ConnectButton} from "sui-svelte/ConnectButton"
+    import {SuiModule, account, SuiModule} from "sui-svelte/SuiModule"
+    
+    // (Optional) Callback to call when a Sui account is connected
+    const onConnect = () => {
+        if (account.value) {
+        console.log("Connected address: ", account.value.address)
+        }
+    }
 </script>
 
-<SuiModule />
+<SuiModule {onConnect} />
 <ConnectButton />
+{#if account.value}
+    <div>Connected address: {account.value.address}</div>
+{/if}
  ```
 
 # Getting connected account
@@ -30,10 +41,10 @@ The account object exposes the connected account.
  <script lang="ts">
 	import { account } from "sui-svelte/SuiModule"
 
-    console.log("Is account connected?", account.val !== undefined)
-    if (account.val) {
-        console.log("Connected account object:", account.val)
-        console.log("Connected address:", account.val.address)
+    console.log("Is account connected?", account.value !== undefined)
+    if (account.value) {
+        console.log("Connected account object:", account.value)
+        console.log("Connected address:", account.value.address)
     }
 </script>
   ```
@@ -100,7 +111,7 @@ You should always open the modal using the ConnectButton or the connect exported
     // Call the modal resolve function with the wallet
     const selectWallet = () => {
         const wallet = getWallet()
-        resolve.val(wallet)
+        resolve.value(wallet)
     }
 
     // If closed, call the close method of connectModal

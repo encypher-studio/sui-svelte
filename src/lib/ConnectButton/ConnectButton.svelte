@@ -9,7 +9,7 @@
   const { class: className = "", style = "" } = $props<IProps>()
 
   const onClick = function () {
-    if (!account.val) {
+    if (!account.value) {
       connectWithModal()
     } else {
       disconnect()
@@ -18,5 +18,5 @@
 </script>
 
 <button type="button" class={className} {style} onclick={onClick}>
-  {account.val ? "Disconnect" : "Connect"}
+  {account.value ? "Disconnect" : "Connect"}
 </button>

@@ -12,13 +12,14 @@
   import ConnectModal, { type IConnectModal } from "../ConnectModal/ConnectModal.svelte"
   import type { SuiSignAndExecuteTransactionBlockOutput } from "@mysten/wallet-standard"
 
-  export let connectModal = $state<IConnectModal>()
   let walletAdapter = $state<IWalletAdapter>()
   let status = $state<ConnectionStatus>(ConnectionStatus.DISCONNECTED)
   let _account = $state<WalletAccount>()
+  export let connectModal = $state<IConnectModal>()
+  let _onConnect = $state<() => void>(() => {})
 
   export const account = {
-    get val() {
+    get value() {
       return _account
     },
     setAccount(account: WalletAccount) {
@@ -30,7 +31,7 @@
   }
 
   export const connectWithModal = async () => {
-    if (account.val) return
+    if (account.value) return
     let selectedWallet = await connectModal?.openAndWaitForResponse()
     if (selectedWallet) {
       await connect(selectedWallet)
@@ -45,6 +46,7 @@
         await walletAdapter.connect()
         account.setAccount(walletAdapter.accounts[0])
         status = ConnectionStatus.CONNECTED
+        _onConnect()
       } catch {
         status = ConnectionStatus.DISCONNECTED
       }
@@ -61,8 +63,8 @@
   ): Promise<SuiSignAndExecuteTransactionBlockOutput> => {
     ensureCallable()
     return await walletAdapter!!.signAndExecuteTransactionBlock({
-      account: account.val!!,
-      chain: account.val!!.chains[0] as IdentifierString,
+      account: account.value!!,
+      chain: account.value!!.chains[0] as IdentifierString,
       transactionBlock
     })
   }
@@ -100,6 +102,15 @@
   }
 
   let availableWallets = getAvailableWallets(AllDefaultWallets)
+</script>
+
+<script lang="ts">
+  interface IProps {
+    onConnect: () => void
+  }
+
+  const { onConnect } = $props<IProps>()
+  _onConnect = onConnect
 </script>
 
 <ConnectModal isCustom={$$slots.modal ? true : false} bind:this={connectModal} {availableWallets}>
