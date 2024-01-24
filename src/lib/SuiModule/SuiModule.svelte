@@ -106,11 +106,13 @@
 
 <script lang="ts">
   interface IProps {
-    onConnect: () => void
+    onConnect?: () => void
   }
 
   const { onConnect } = $props<IProps>()
-  _onConnect = onConnect
+  if (onConnect) {
+    _onConnect = onConnect
+  }
 </script>
 
 <ConnectModal isCustom={$$slots.modal ? true : false} bind:this={connectModal} {availableWallets}>
