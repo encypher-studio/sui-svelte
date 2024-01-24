@@ -10,7 +10,7 @@
   }
 </script>
 
-<SuiModule />
+<SuiModule {onConnect} />
 <ConnectButton />
 {#if account.value}
   <div>Connected address: {account.value.address}</div>
