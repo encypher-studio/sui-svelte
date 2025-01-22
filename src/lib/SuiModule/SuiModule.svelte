@@ -1,5 +1,5 @@
-<script lang="ts" context="module">
-  import { TransactionBlock } from "@mysten/sui.js/transactions"
+<script lang="ts" module>
+  import { Transaction } from "@mysten/sui/transactions"
   import {
     AllDefaultWallets,
     ConnectionStatus,
@@ -10,12 +10,13 @@
   } from "@suiet/wallet-sdk"
   import type { IdentifierString, WalletAccount } from "@wallet-standard/base"
   import ConnectModal, { type IConnectModal } from "../ConnectModal/ConnectModal.svelte"
-  import type { SuiSignAndExecuteTransactionBlockOutput } from "@mysten/wallet-standard"
+  import type { SuiSignAndExecuteTransactionOutput } from "@mysten/wallet-standard"
 
   let walletAdapter = $state<IWalletAdapter>()
   let status = $state<ConnectionStatus>(ConnectionStatus.DISCONNECTED)
   let _account = $state<WalletAccount>()
-  export let connectModal = $state<IConnectModal>()
+  let connectModal = $state<IConnectModal>()
+  export let getConnectModal = () => connectModal
   let _onConnect = $state<() => void>(() => {})
 
   export const account = {
@@ -59,13 +60,13 @@
   }
 
   export const signAndExecuteTransactionBlock = async (
-    transactionBlock: TransactionBlock
-  ): Promise<SuiSignAndExecuteTransactionBlockOutput> => {
+    transaction: Transaction
+  ): Promise<SuiSignAndExecuteTransactionOutput> => {
     ensureCallable()
-    return await walletAdapter!!.signAndExecuteTransactionBlock({
+    return await walletAdapter!!.signAndExecuteTransaction({
       account: account.value!!,
       chain: account.value!!.chains[0] as IdentifierString,
-      transactionBlock
+      transaction: transaction
     })
   }
 
@@ -109,7 +110,7 @@
     onConnect?: () => void
   }
 
-  const { onConnect } = $props<IProps>()
+  const { onConnect }: IProps = $props()
   if (onConnect) {
     _onConnect = onConnect
   }

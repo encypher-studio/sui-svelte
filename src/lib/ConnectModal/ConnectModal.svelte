@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
   export interface IConnectModal {
     openAndWaitForResponse: () => Promise<IWallet | undefined>
   }
@@ -12,7 +12,8 @@
       _resolve = resolve
     }
   }
-  export let connectModal = $state<HTMLDialogElement>()
+  let connectModal = $state<HTMLDialogElement>()
+  let getConnectModal = () => connectModal
 </script>
 
 <script lang="ts">
@@ -23,7 +24,7 @@
     isCustom: boolean
   }
 
-  let { availableWallets, isCustom } = $props<IProps>()
+  let { availableWallets, isCustom }: IProps = $props()
   let isOpen = $state<boolean>(false)
 
   $effect(() => {
