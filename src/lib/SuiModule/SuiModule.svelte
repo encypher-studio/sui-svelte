@@ -59,7 +59,7 @@
     account.removeAccount()
   }
 
-  export const signAndExecuteTransactionBlock = async (
+  export const signAndExecuteTransaction = async (
     transaction: Transaction
   ): Promise<SuiSignAndExecuteTransactionOutput> => {
     ensureCallable()
